@@ -1,0 +1,10 @@
+com\nickslibrary\hashing\HashTableTest.class
+com\nickslibrary\linear\StackTest.class
+com\nickslibrary\trees\RedBlackTreeTest.class
+com\nickslibrary\graphs\GraphTest.class
+com\nickslibrary\linear\DoublyLinkedListTest.class
+com\nickslibrary\graphs\DisjointSetTest.class
+com\nickslibrary\linear\QueueTest.class
+com\nickslibrary\linear\DynamicArrayTest.class
+com\nickslibrary\trees\AVLTreeTest.class
+com\nickslibrary\trees\BSTTest.class
