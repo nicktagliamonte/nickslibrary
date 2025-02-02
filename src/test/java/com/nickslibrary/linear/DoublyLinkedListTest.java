@@ -1,4 +1,4 @@
-package com.nickslibrary.tests.linear;
+package com.nickslibrary.linear;
 
 public class DoublyLinkedListTest {
     

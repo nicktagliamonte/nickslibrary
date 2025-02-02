@@ -55,7 +55,7 @@ public class DynamicArray<T> {
     @SuppressWarnings("unchecked")
     public T get(int index) {
         if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds. Size of array is " + size);
         }
         return (T) array[index];
     }

@@ -1,4 +1,4 @@
-package com.nickslibrary.tests.graphs;
+package com.nickslibrary.graphs;
 
 public class DisjointSetTest {
     

@@ -1,4 +1,4 @@
-package com.nickslibrary.tests.trees;
+package com.nickslibrary.trees;
 
 public class RedBlackTreeTest {
     
