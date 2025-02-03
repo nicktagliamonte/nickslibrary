@@ -1,5 +1,5 @@
 package com.nickslibrary.linear;
 
-public class DoublyLinkedListTest {
+public class LinkedListTest {
     
 }
