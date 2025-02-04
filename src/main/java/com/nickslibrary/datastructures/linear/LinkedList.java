@@ -15,11 +15,11 @@ public class LinkedList<T> {
     }
 
     // Fields
-    private Node<T> head;
-    private Node<T> tail;
+    public Node<T> head;
+    public Node<T> tail;
     private int size;
-    private boolean isCircular;
-    private boolean isSinglyLinked;
+    public boolean isCircular;
+    public boolean isSinglyLinked;
 
     // Constructor
     public LinkedList(boolean isCircular, boolean isSinglyLinked) {
@@ -212,7 +212,7 @@ public class LinkedList<T> {
         }
 
         // Case 2: Removing the tail (index == size - 1)
-        if (index == size - 1) {
+        else if (index == size - 1 && !isSinglyLinked) {
             if (isCircular) {
                 // Circular tail removal
                 tail.prev.next = head;
@@ -221,8 +221,11 @@ public class LinkedList<T> {
                 }
             }
             tail = tail.prev; // Move tail to the previous node
-            if (!isCircular && !isSinglyLinked) {
+            if (!isCircular) {
                 tail.next = null; // Update tail's next in non-circular doubly linked list
+            }
+            if (tail == null) { // If the list becomes empty, reset both head and tail to null
+                head = null;
             }
             size--;
             return;
@@ -260,41 +263,51 @@ public class LinkedList<T> {
         }
 
         size--;
+        printList();
     }
 
     // Search the array for some data and return the index of the first occurrence
     // of that data
     public int search(T data) {
-        if (head == null) return -1;  // Handle empty list
-    
+        if (head == null)
+            return -1; // Handle empty list
+
         Node<T> current = head;
         for (int i = 0; i < size; i++) {
             if (current.data == data) {
-                return i;  // Return the index of the first match
+                return i; // Return the index of the first match
             }
             current = current.next;
-            
+
             // If it's a circular list, break the loop when we return to the head
             if (isCircular && current == head) {
                 break;
             }
         }
-        return -1;  // Return -1 if no match is found
-    }    
+        return -1; // Return -1 if no match is found
+    }
 
     // Return the data at the specified index
     public T get(int index) {
+
+        // Adjust for circular behavior before bounds checking
+        if (isCircular) {
+            index = index % size;
+        }
+
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Invalid index: " + index);
         }
-    
+
         if (head == null) {
             throw new IllegalStateException("List is empty");
         }
 
-        if (index == size - 1) return tail.data;
-    
-        // If index is closer to the head (index < size / 2) or it's singly linked, iterate from the head
+        if (index == size - 1)
+            return tail.data;
+
+        // If index is closer to the head (index < size / 2) or it's singly linked,
+        // iterate from the head
         Node<T> current;
         if (index < size / 2 || isSinglyLinked) {
             current = head;
@@ -307,11 +320,10 @@ public class LinkedList<T> {
                 current = current.prev;
             }
         }
-    
-        return current.data;  // Return the data at the requested index
-    }    
 
-    
+        return current.data; // Return the data at the requested index
+    }
+
     // Return the number of nodes in the list
     public int size() {
         return size;
@@ -355,15 +367,16 @@ public class LinkedList<T> {
             System.out.println("The list is empty.");
             return;
         }
-    
+
         Node<T> current = head;
         while (current != null) {
             System.out.print(current.data + ", ");
             current = current.next;
-            if (current == head && isCircular) break;  // Prevent infinite loop in circular lists
+            if (current == head && isCircular)
+                break; // Prevent infinite loop in circular lists
         }
         System.out.println();
-    }    
+    }
 
     // Reverse the list (particularly useful for doubly linked mode)
     public void reverse() {
@@ -371,32 +384,33 @@ public class LinkedList<T> {
             // If the list is empty or has only one element, no need to reverse
             return;
         }
-    
+
         Node<T> current = head;
         Node<T> temp = null;
         Node<T> prev = null;
-    
+
         // If doubly linked, need to handle prev and next for each node
         while (current != null) {
-            temp = current.next;  // Save the next node
-            current.next = prev;  // Reverse the next pointer
+            temp = current.next; // Save the next node
+            current.next = prev; // Reverse the next pointer
             if (!isSinglyLinked) {
-                current.prev = temp;  // Reverse the prev pointer (only for doubly linked list)
+                current.prev = temp; // Reverse the prev pointer (only for doubly linked list)
             }
-            prev = current;  // Move prev to the current node
-            current = temp;  // Move to the next node
-            if (current == head && isCircular) break;  // Prevent infinite loop in circular lists
+            prev = current; // Move prev to the current node
+            current = temp; // Move to the next node
+            if (current == head && isCircular)
+                break; // Prevent infinite loop in circular lists
         }
-    
+
         // After loop, prev will be the new head, so set the head and tail accordingly
         head = prev;
         if (isCircular) {
-            tail.next = head;  // In circular mode, make sure the tail points to the head
+            tail.next = head; // In circular mode, make sure the tail points to the head
             if (!isSinglyLinked) {
-                head.prev = tail;  // Maintain the circular doubly linked structure
+                head.prev = tail; // Maintain the circular doubly linked structure
             }
         } else {
-            tail = head;  // Tail becomes head after reversing for a non-circular list
+            tail = head; // Tail becomes head after reversing for a non-circular list
         }
-    }    
+    }
 }
