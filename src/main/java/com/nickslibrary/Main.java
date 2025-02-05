@@ -13,5 +13,7 @@ public class Main {
         linkedList.add(30);
         linkedList.add(40);
         linkedList.removeAt(3);
+        linkedList.remove(30);
+        linkedList.printList();
     }
 }

@@ -50,6 +50,23 @@ public class DynamicArray<T> {
         }
     }
 
+    public void add(int index, T element) {
+        if (index < 0 || index > size)
+            return; // Index must be in range [0, size]
+
+        if (size >= capacity) {
+            resize();
+        }
+
+        // Shift elements starting from the index
+        for (int i = size; i > index; i--) {
+            array[i] = array[i - 1];
+        }
+
+        array[index] = element; // Insert element at the specified index
+        size++; // Increment size
+    }
+
     // Retrieves the element at the specified index
     // Throws IndexOutOfBoundsException if the index is invalid
     @SuppressWarnings("unchecked")
@@ -120,5 +137,22 @@ public class DynamicArray<T> {
         }
         sb.append(']');
         return sb.toString();
+    }
+
+    /**
+     * Reduces the capacity to match the current size.
+     */
+    public void shrinkToFit() {
+        this.capacity = this.size;
+    }
+
+    /**
+     * Removes all elements from the array
+     */
+    public void clear() {
+        for (int i = 0; i < size; i++) {
+            array[i] = null;
+        }
+        size = 0;
     }
 }

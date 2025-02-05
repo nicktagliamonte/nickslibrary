@@ -102,4 +102,47 @@ public class DynamicArrayTest {
         arr.remove(0);
         assertEquals(2, arr.capacity());
     }
+
+    @Test
+    void testAddAtIndex() {
+        DynamicArray<Integer> dynamicArray = new DynamicArray<>();
+        
+        // Add elements at different positions
+        dynamicArray.add(0, 10);  // Adding at the start
+        dynamicArray.add(1, 20);  // Adding at the end
+        dynamicArray.add(1, 15);  // Adding in the middle
+
+        // Validate array contents
+        assertEquals(3, dynamicArray.size(), "Size should be 3 after additions.");
+        assertEquals(10, dynamicArray.get(0), "First element should be 10.");
+        assertEquals(15, dynamicArray.get(1), "Second element should be 15.");
+        assertEquals(20, dynamicArray.get(2), "Third element should be 20.");
+    }
+
+    @Test
+    void testAddAtInvalidIndex() {
+        DynamicArray<Integer> dynamicArray = new DynamicArray<>();
+        
+        dynamicArray.add(0, 10);
+        dynamicArray.add(1, 20);
+
+        // Test adding out of bounds
+        dynamicArray.add(-1, 5);  // Invalid index, should not add
+        dynamicArray.add(3, 30);   // Invalid index, should not add
+
+        assertEquals(2, dynamicArray.size(), "Size should be 2 after invalid adds.");
+    }
+
+    @Test
+    void testAddResizing() {
+        DynamicArray<Integer> dynamicArray = new DynamicArray<>();
+        
+        // Adding a large number of elements to test resizing
+        for (int i = 0; i < 1000; i++) {
+            dynamicArray.add(i);
+        }
+
+        assertEquals(1000, dynamicArray.size(), "Size should be 1000 after adding elements.");
+        assertTrue(dynamicArray.capacity() > 1000, "Capacity should have increased.");
+    }
 }

@@ -181,13 +181,13 @@ public class LinkedListTest {
         nonCircularSinglyLinked.add(40);
 
         // Remove head
-        //nonCircularSinglyLinked.removeAt(0);
-        //assertEquals(20, nonCircularSinglyLinked.get(0)); // Ensure 20 is now at index 0
-        //assertEquals(30, nonCircularSinglyLinked.get(1)); // Ensure 30 is now at index 1
+        nonCircularSinglyLinked.removeAt(0);
+        assertEquals(20, nonCircularSinglyLinked.get(0)); // Ensure 20 is now at index 0
+        assertEquals(30, nonCircularSinglyLinked.get(1)); // Ensure 30 is now at index 1
 
         // Remove tail
-        nonCircularSinglyLinked.removeAt(1); // Tail is at index 1
-        assertEquals(40, nonCircularSinglyLinked.get(2)); // Ensure 20 is the only element left
+        nonCircularSinglyLinked.removeAt(2); // Tail is at index 1
+        assertEquals(40, nonCircularSinglyLinked.get(1)); // Ensure 20 is the only element left
 
         // Test for circular singly linked list
         circularSinglyLinked.add(10);
