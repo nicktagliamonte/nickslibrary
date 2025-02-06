@@ -91,7 +91,7 @@ public class StackArray<T> {
     public T[] toArray() {
         Object[] arr = new Object[array.size()];
         for (int i = 0; i < array.size(); i++) {
-            arr[i] = array.get(i);
+            arr[i] = array.get(array.size() - 1 - i);
         }
         return (T[]) arr;
     }
