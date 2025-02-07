@@ -1,12 +1,26 @@
 package com.nickslibrary.datastructures.linear;
 
+/**
+ * A generic LinkedList class that supports both singly and doubly linked lists
+ * with optional circular behavior.
+ *
+ * @param <T> The type of elements in the list.
+ */
 public class LinkedList<T> {
-    // Private inner class for list node
-    private static class Node<T> {
-        T data;
-        Node<T> next;
-        Node<T> prev;
 
+    /**
+     * Private inner class representing a node in the list.
+     */
+    private static class Node<T> {
+        T data; // Data stored in the node
+        Node<T> next; // Pointer to the next node
+        Node<T> prev; // Pointer to the previous node (for doubly linked lists)
+
+        /**
+         * Constructs a new node with the given data.
+         * 
+         * @param data The data to store in the node.
+         */
         Node(T data) {
             this.data = data;
             this.next = null;
@@ -14,14 +28,19 @@ public class LinkedList<T> {
         }
     }
 
-    // Fields
+    // Fields for the LinkedList class
     public Node<T> head;
     public Node<T> tail;
     private int size;
     public boolean isCircular;
     public boolean isSinglyLinked;
 
-    // Constructor
+    /**
+     * Constructs a new LinkedList with the specified properties.
+     * 
+     * @param isCircular     If true, the list will be circular.
+     * @param isSinglyLinked If true, the list will be singly linked.
+     */
     public LinkedList(boolean isCircular, boolean isSinglyLinked) {
         this.head = null;
         this.tail = null;
@@ -30,11 +49,15 @@ public class LinkedList<T> {
         this.isSinglyLinked = isSinglyLinked;
     }
 
-    // Standard Methods
-    // Add a node to the list
+    /**
+     * Adds a new node with the specified data to the list.
+     * 
+     * @param data The data to store in the new node.
+     */
     public void add(T data) {
         Node<T> newNode = new Node<>(data);
 
+        // Handle adding to an empty list
         if (head == null) {
             head = tail = newNode;
             if (isCircular) {
@@ -50,6 +73,7 @@ public class LinkedList<T> {
             }
             tail = newNode;
 
+            // Adjust circular references if necessary
             if (isCircular) {
                 tail.next = head;
                 if (!isSinglyLinked) {
@@ -61,7 +85,13 @@ public class LinkedList<T> {
         size++;
     }
 
-    // Insert a node at a specific position
+    /**
+     * Inserts a new node at the specified index.
+     * 
+     * @param index The index where the new node should be inserted.
+     * @param data  The data to store in the new node.
+     * @throws IndexOutOfBoundsException If the index is out of bounds.
+     */
     public void insert(int index, T data) {
         if (index < 0 || index > size) {
             throw new IndexOutOfBoundsException("Invalid index: " + index);
@@ -69,6 +99,7 @@ public class LinkedList<T> {
 
         Node<T> newNode = new Node<>(data);
 
+        // Case 1: Insert at the beginning
         if (index == 0) {
             newNode.next = head;
             if (head != null) {
@@ -76,26 +107,31 @@ public class LinkedList<T> {
             }
             head = newNode;
 
+            // Adjust circular references
             if (isCircular) {
-                if (tail == null) { // Empty list case
+                if (tail == null) {
                     tail = newNode;
                     head.next = head;
-                    if (!isSinglyLinked)
+                    if (!isSinglyLinked) {
                         head.prev = head;
+                    }
                 } else {
                     tail.next = head;
-                    if (!isSinglyLinked)
+                    if (!isSinglyLinked) {
                         head.prev = tail;
+                    }
                 }
             }
 
-            if (tail == null)
-                tail = head; // First element case
+            if (tail == null) {
+                tail = head; // If the list was empty, set the tail
+            }
         } else if (index == size) {
-            add(data);
+            add(data); // Use the add method to insert at the end
             return;
         } else {
             Node<T> current;
+            // Case 2: Insert at a middle position
             if (index < size / 2 || isSinglyLinked) {
                 current = head;
                 for (int i = 0; i < index - 1; i++) {
@@ -130,7 +166,12 @@ public class LinkedList<T> {
         size++;
     }
 
-    // Remove the first occurrence of the specified value
+    /**
+     * Removes the first occurrence of the specified value from the list.
+     * If the value is not found, the list remains unchanged.
+     *
+     * @param data The data to be removed from the list.
+     */
     public void remove(T data) {
         // Case 1: Empty list
         if (head == null)
@@ -188,7 +229,16 @@ public class LinkedList<T> {
         }
     }
 
-    // Remove a node at the specified index
+    /**
+     * Removes the node at the specified index in the list.
+     * If the index is out of bounds, an {@link IndexOutOfBoundsException} will be
+     * thrown.
+     *
+     * @param index The index of the node to be removed.
+     * @throws IndexOutOfBoundsException if the index is invalid (less than 0 or
+     *                                   greater than or equal to the size of the
+     *                                   list).
+     */
     public void removeAt(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Invalid index: " + index);
@@ -266,8 +316,17 @@ public class LinkedList<T> {
         printList();
     }
 
-    // Search the array for some data and return the index of the first occurrence
-    // of that data
+    /**
+     * Searches for the specified data in the list and returns the index of the
+     * first occurrence.
+     * If the data is not found, it returns -1.
+     * The search is performed by iterating through the list until a match is found.
+     * If the list is circular, the search stops once the loop reaches the head
+     * again.
+     *
+     * @param data The data to search for in the list.
+     * @return The index of the first occurrence of the data, or -1 if not found.
+     */
     public int search(T data) {
         if (head == null)
             return -1; // Handle empty list
@@ -287,7 +346,23 @@ public class LinkedList<T> {
         return -1; // Return -1 if no match is found
     }
 
-    // Return the data at the specified index
+    /**
+     * Returns the data at the specified index in the list.
+     * If the index is out of bounds, an {@link IndexOutOfBoundsException} is
+     * thrown.
+     * In the case of a circular list, the index is adjusted to wrap around.
+     * If the list is empty, an {@link IllegalStateException} is thrown.
+     * If the index is closer to the head, the list is traversed starting from the
+     * head,
+     * otherwise, traversal begins from the tail. The traversal method depends on
+     * whether
+     * the list is singly or doubly linked.
+     *
+     * @param index The index of the element to retrieve.
+     * @return The data at the specified index.
+     * @throws IndexOutOfBoundsException If the index is out of bounds.
+     * @throws IllegalStateException     If the list is empty.
+     */
     public T get(int index) {
 
         // Adjust for circular behavior before bounds checking
@@ -324,30 +399,52 @@ public class LinkedList<T> {
         return current.data; // Return the data at the requested index
     }
 
-    // Return the number of nodes in the list
+    /**
+     * Returns the number of nodes in the list.
+     *
+     * @return The size of the list, indicating the number of elements it contains.
+     */
     public int size() {
         return size;
     }
 
-    // Check if the list is empty
+    /**
+     * Checks if the list is empty.
+     *
+     * @return {@code true} if the list contains no elements, {@code false}
+     *         otherwise.
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
-    // Remove all elements from the list
+    /**
+     * Removes all elements from the list, effectively clearing the list.
+     * After calling this method, the list will be empty.
+     */
     public void clear() {
         head = tail = null;
         size = 0;
     }
 
     // Utility methods
-    // Return true if the value is in the list
+    /**
+     * Checks if the specified value exists in the list.
+     * 
+     * @param data the value to search for in the list
+     * @return true if the value is found, false otherwise
+     */
     public boolean contains(T data) {
-        // Return true if the value is in the list
         return search(data) != -1;
     }
 
-    // Convert the list to an array
+    /**
+     * Converts the list to an array of the same type.
+     * 
+     * @return an array containing all the elements of the list
+     * @throws ClassCastException if the type of the list's elements is incompatible
+     *                            with the array
+     */
     @SuppressWarnings("unchecked")
     public T[] toArray() {
         T[] array = (T[]) new Object[size];
@@ -361,7 +458,13 @@ public class LinkedList<T> {
         return array;
     }
 
-    // Print the list elements
+    /**
+     * Prints the elements of the list to the console.
+     * 
+     * If the list is empty, a message indicating so is printed. For circular lists,
+     * the method
+     * ensures that the list is not printed indefinitely.
+     */
     public void printList() {
         if (head == null) {
             System.out.println("The list is empty.");
@@ -378,7 +481,16 @@ public class LinkedList<T> {
         System.out.println();
     }
 
-    // Reverse the list (particularly useful for doubly linked mode)
+    /**
+     * Reverses the list, adjusting the next and prev pointers.
+     * 
+     * This method is particularly useful for doubly linked lists, as it modifies
+     * both
+     * the next and prev pointers of each node. If the list is empty or has only one
+     * element,
+     * no reversal occurs. In circular lists, the tail will correctly point to the
+     * head after reversal.
+     */
     public void reverse() {
         if (head == null || head.next == null) {
             // If the list is empty or has only one element, no need to reverse

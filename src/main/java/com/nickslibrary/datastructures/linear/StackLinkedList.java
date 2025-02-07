@@ -1,3 +1,11 @@
+/**
+ * A stack implementation using a linked list.
+ * This stack follows the standard Last-In-First-Out (LIFO) principle.
+ * Elements are added to the top of the stack and removed from the top.
+ * It is implemented using a singly linked list.
+ *
+ * @param <T> The type of elements stored in the stack.
+ */
 package com.nickslibrary.datastructures.linear;
 
 public class StackLinkedList<T> {

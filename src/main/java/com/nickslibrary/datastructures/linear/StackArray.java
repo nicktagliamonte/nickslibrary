@@ -1,3 +1,11 @@
+/**
+ * This class represents a stack data structure implemented using an array-based dynamic array.
+ * It provides the standard stack operations such as push, pop, peek, and checking if the stack
+ * is empty. Additionally, methods to check the stack's size, capacity, and elements, as well as 
+ * to clear and convert the stack to an array, are included.
+ * 
+ * @param <T> The type of elements in the list.
+ */
 package com.nickslibrary.datastructures.linear;
 
 public class StackArray<T> {
