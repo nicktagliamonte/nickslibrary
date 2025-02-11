@@ -226,4 +226,80 @@ public class LinkedListTest {
         nonCircularDoublyLinked.removeAt(1); // Tail is at index 1
         assertEquals(20, nonCircularDoublyLinked.get(0)); // Only one element left, 20
     }
+
+    @Test
+    void testReverse() {
+        // Test empty lists (should remain empty after reversal)
+        circularSinglyLinked.reverse();
+        assertTrue(circularSinglyLinked.isEmpty());
+
+        nonCircularSinglyLinked.reverse();
+        assertTrue(nonCircularSinglyLinked.isEmpty());
+
+        circularDoublyLinked.reverse();
+        assertTrue(circularDoublyLinked.isEmpty());
+
+        nonCircularDoublyLinked.reverse();
+        assertTrue(nonCircularDoublyLinked.isEmpty());
+
+        // Test single-element lists (should remain unchanged after reversal)
+        circularSinglyLinked.add(1);
+        circularSinglyLinked.reverse();
+        assertEquals(1, circularSinglyLinked.get(0));
+
+        nonCircularSinglyLinked.add(1);
+        nonCircularSinglyLinked.reverse();
+        assertEquals(1, nonCircularSinglyLinked.get(0));
+
+        circularDoublyLinked.add(1);
+        circularDoublyLinked.reverse();
+        assertEquals(1, circularDoublyLinked.get(0));
+
+        nonCircularDoublyLinked.add(1);
+        nonCircularDoublyLinked.reverse();
+        assertEquals(1, nonCircularDoublyLinked.get(0));
+
+        // Test multi-element non-circular doubly linked list reversal
+        nonCircularDoublyLinked.add(1);
+        nonCircularDoublyLinked.add(2);
+        nonCircularDoublyLinked.add(3);
+        nonCircularDoublyLinked.reverse();
+        assertEquals(3, nonCircularDoublyLinked.get(0));
+        assertEquals(2, nonCircularDoublyLinked.get(1));
+        assertEquals(1, nonCircularDoublyLinked.get(2));
+
+        // Test multi-element circular doubly linked list reversal
+        circularDoublyLinked.add(1);
+        circularDoublyLinked.add(2);
+        circularDoublyLinked.add(3);
+        circularDoublyLinked.reverse();
+        assertEquals(3, circularDoublyLinked.get(0));
+        assertEquals(2, circularDoublyLinked.get(1));
+        assertEquals(1, circularDoublyLinked.get(2));
+
+        // Check circularity by verifying the tail's next points to the head node
+        assertEquals(circularDoublyLinked.head, circularDoublyLinked.tail.next);
+
+        // Test multi-element non-circular singly linked list reversal
+        nonCircularSinglyLinked.add(1);
+        nonCircularSinglyLinked.add(2);
+        nonCircularSinglyLinked.add(3);
+        nonCircularSinglyLinked.reverse();
+        assertEquals(3, nonCircularSinglyLinked.get(0));
+        assertEquals(2, nonCircularSinglyLinked.get(1));
+        assertEquals(1, nonCircularSinglyLinked.get(2));
+
+        // Test multi-element circular singly linked list reversal
+        circularSinglyLinked.add(1);
+        circularSinglyLinked.add(2);
+        circularSinglyLinked.add(3);
+        circularSinglyLinked.reverse();
+        assertEquals(3, circularSinglyLinked.get(0));
+        assertEquals(2, circularSinglyLinked.get(1));
+        assertEquals(1, circularSinglyLinked.get(2));
+
+        // Check circularity by verifying the last node's next points to the first node
+        // (head)
+        assertEquals(circularSinglyLinked.head, circularSinglyLinked.tail.next);
+    }
 }

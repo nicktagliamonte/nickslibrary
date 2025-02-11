@@ -1,19 +1,21 @@
 package com.nickslibrary.datastructures.linear;
 
+import java.util.Iterator;
+
 /**
  * A generic LinkedList class that supports both singly and doubly linked lists
  * with optional circular behavior.
  *
  * @param <T> The type of elements in the list.
  */
-public class LinkedList<T> {
+public class LinkedList<T> implements Iterable<T> {
 
     /**
      * Private inner class representing a node in the list.
      */
-    private static class Node<T> {
+    public static class Node<T> {
         T data; // Data stored in the node
-        Node<T> next; // Pointer to the next node
+        public Node<T> next; // Pointer to the next node
         Node<T> prev; // Pointer to the previous node (for doubly linked lists)
 
         /**
@@ -498,31 +500,68 @@ public class LinkedList<T> {
         }
 
         Node<T> current = head;
-        Node<T> temp = null;
         Node<T> prev = null;
+        Node<T> temp;
 
-        // If doubly linked, need to handle prev and next for each node
-        while (current != null) {
-            temp = current.next; // Save the next node
-            current.next = prev; // Reverse the next pointer
+        // Swap next and prev pointers for every node
+        do {
+            temp = current.next; // Save next node
+            current.next = prev; // Reverse next pointer
             if (!isSinglyLinked) {
-                current.prev = temp; // Reverse the prev pointer (only for doubly linked list)
+                current.prev = temp; // Reverse prev pointer (only for doubly linked)
             }
-            prev = current; // Move prev to the current node
-            current = temp; // Move to the next node
-            if (current == head && isCircular)
-                break; // Prevent infinite loop in circular lists
-        }
+            prev = current; // Move prev to current
+            current = temp; // Move to next node
+        } while (isCircular ? current != head : current != null);
 
-        // After loop, prev will be the new head, so set the head and tail accordingly
+        // After reversal, prev is the new head
+        tail = head;
         head = prev;
+
         if (isCircular) {
-            tail.next = head; // In circular mode, make sure the tail points to the head
+            tail.next = head; // Ensure circular linking
             if (!isSinglyLinked) {
-                head.prev = tail; // Maintain the circular doubly linked structure
+                head.prev = tail; // Maintain circular doubly linked property
             }
         } else {
-            tail = head; // Tail becomes head after reversing for a non-circular list
+            // Traverse from head to find the correct tail
+            current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            tail = current; // Set new tail
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new LinkedListIterator();
+    }
+
+    private class LinkedListIterator implements Iterator<T> {
+        private Node<T> currentNode;
+        private Node<T> startNode; // Keeps track of the head of the list for circular check
+
+        public LinkedListIterator() {
+            this.currentNode = head;
+            this.startNode = head;
+        }
+
+        @Override
+        public boolean hasNext() {
+            // If the list is circular, we need to check if we've looped back to the start
+            // node
+            return currentNode != null && (!isCircular || currentNode != startNode);
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new java.util.NoSuchElementException();
+            }
+            T data = currentNode.data;
+            currentNode = currentNode.next; // Move to the next node
+            return data;
         }
     }
 }
