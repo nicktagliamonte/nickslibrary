@@ -1,6 +1,3 @@
-/**
- * TODO: track resize differently. refactor such that a comparison is made between lineartable.capacity and maybe this.size.
-*/
 package com.nickslibrary.datastructures.hashing;
 
 import com.nickslibrary.datastructures.linear.DynamicArray;
