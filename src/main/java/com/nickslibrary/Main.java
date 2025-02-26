@@ -1,19 +1,16 @@
 package com.nickslibrary;
 
-import com.nickslibrary.datastructures.linear.*;
+import com.nickslibrary.datastructures.hashing.HashTable;
+import com.nickslibrary.datastructures.hashing.HashTable.CollisionResolution;
 
 /**
  *
  */
 public class Main {
     public static void main(String[] args) {
-        LinkedList<Integer> linkedList = new LinkedList<>(false, true);
-        linkedList.add(10);
-        linkedList.add(20);
-        linkedList.add(30);
-        linkedList.add(40);
-        linkedList.removeAt(3);
-        linkedList.remove(30);
-        linkedList.printList();
+        HashTable<String, Integer> smallTable = new HashTable<>(2, CollisionResolution.OPEN_ADDRESSING);
+        smallTable.put("key1", 100);
+        smallTable.put("key2", 200);
+        smallTable.put("key3", 300); // Should trigger rehash
     }
 }

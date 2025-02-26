@@ -1,3 +1,6 @@
+/**
+ * TODO: track resize differently. refactor such that a comparison is made between lineartable.capacity and maybe this.size.
+*/
 package com.nickslibrary.datastructures.hashing;
 
 import com.nickslibrary.datastructures.linear.DynamicArray;
@@ -59,6 +62,9 @@ public class HashTable<K, V> {
      *                           OPEN_ADDRESSING)
      */
     public HashTable(int capacity, CollisionResolution resolutionStrategy, ProbingStrategy probingStrategy) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Capacity must be greater than 0");
+        }
         this.resolutionStrategy = resolutionStrategy;
         this.probingStrategy = (resolutionStrategy == CollisionResolution.OPEN_ADDRESSING) ? probingStrategy : null;
         this.size = 0;
@@ -71,6 +77,9 @@ public class HashTable<K, V> {
             }
         } else {
             this.linearTable = new DynamicArray<>(capacity);
+            for (int i = 0; i < capacity; i++) {
+                linearTable.add(i, null);
+            }
             this.linkedTable = null;
         }
     }
@@ -81,7 +90,7 @@ public class HashTable<K, V> {
      * @param key the key to hash
      * @return the index in the table where the key should be placed
      */
-    private int hash(K key) {
+    public int hash(K key) {
         if (resolutionStrategy == CollisionResolution.OPEN_ADDRESSING) {
             int baseIndex = HashFunctions.hash(key, linearTable.capacity());
             return HashFunctions.applyProbing(linearTable, baseIndex, key, probingStrategy);
@@ -98,13 +107,15 @@ public class HashTable<K, V> {
      */
     public void put(K key, V value) {
         int index = hash(key);
-        int capacity;
 
         if (resolutionStrategy == CollisionResolution.OPEN_ADDRESSING) {
-            capacity = linearTable.capacity();
-            linearTable.add(index, new Entry<>(key, value));
+            if (index == -1) {
+                linearTable.add(HashFunctions.hash(key, linearTable.capacity()), new Entry<>(key, value));
+            } else {
+                linearTable.remove(index);
+                linearTable.add(index, new Entry<>(key, value));
+            }
         } else {
-            capacity = linkedTable.capacity();
             // Chain is a reference to the list at table[index], which may be empty
             // any change made to chain will be reflected in the actual list at table[index]
             LinkedList<Entry<K, V>> chain = linkedTable.get(index);
@@ -113,10 +124,6 @@ public class HashTable<K, V> {
                 linkedTable.add(index, chain); // Add the newly created chain back into the table
             }
             chain.add(new Entry<>(key, value));
-        }
-
-        if (size >= capacity) {
-            rehash();
         }
 
         size++;
@@ -129,10 +136,9 @@ public class HashTable<K, V> {
      * @return the value associated with the key, or null if not found
      */
     public V get(K key) {
-        int index = hash(key);
-
         if (resolutionStrategy == CollisionResolution.SEPARATE_CHAINING) {
-            LinkedList<Entry<K, V>> chain = linkedTable.get(index);
+            int linkedIndex = hash(key);
+            LinkedList<Entry<K, V>> chain = linkedTable.get(linkedIndex);
 
             if (chain != null) {
                 for (Entry<K, V> entry : chain) {
@@ -142,61 +148,26 @@ public class HashTable<K, V> {
                 }
             }
         } else {
+            int linearIndex = HashFunctions.hash(key, linearTable.capacity());
             int probeCount = 0;
             int capacity = linearTable.capacity();
 
             while (probeCount < capacity) {
-                if (linearTable.get(index) == null) {
+                if (linearTable.get(linearIndex) == null) {
                     return null;
                 }
 
-                Entry<K, V> entry = linearTable.get(index);
+                Entry<K, V> entry = linearTable.get(linearIndex);
                 if (entry.key.equals(key)) {
                     return entry.value;
                 }
 
-                index = HashFunctions.getNextIndex(linearTable, index, probingStrategy, probeCount, key);
+                linearIndex = HashFunctions.getNextIndex(linearTable, linearIndex, probingStrategy, probeCount, key);
                 probeCount++;
             }
         }
 
         return null;
-    }
-
-    /**
-     * Rehashes all entries to their new positions following a resize.
-     */
-    public void rehash() {
-        if (resolutionStrategy == CollisionResolution.OPEN_ADDRESSING) {
-            DynamicArray<Entry<K, V>> oldTable = linearTable;
-            linearTable = new DynamicArray<>(oldTable.capacity() * 2); // Expand capacity
-
-            for (int i = 0; i < oldTable.capacity(); i++) {
-                if (oldTable.get(i) != null) {
-                    Entry<K, V> entry = oldTable.get(i);
-                    int newIndex = hash(entry.key); // Use existing hash() method
-                    linearTable.add(newIndex, entry);
-                }
-            }
-        } else {
-            // Separate Chaining
-            DynamicArray<LinkedList<Entry<K, V>>> oldTable = linkedTable;
-            linkedTable = new DynamicArray<>(oldTable.capacity() * 2);
-
-            for (int i = 0; i < linkedTable.capacity(); i++) {
-                linkedTable.add(i, new LinkedList<Entry<K, V>>(false, true)); // Ensure lists are initialized
-            }
-
-            for (int i = 0; i < oldTable.capacity(); i++) {
-                LinkedList<Entry<K, V>> chain = oldTable.get(i);
-                if (chain != null) {
-                    for (Entry<K, V> entry : chain) {
-                        int newIndex = hash(entry.key); // Use existing hash() method
-                        linkedTable.get(newIndex).add(entry);
-                    }
-                }
-            }
-        }
     }
 
     /**
@@ -207,10 +178,8 @@ public class HashTable<K, V> {
      */
     public void remove(K key) {
         int index = hash(key);
-        int capacity;
 
         if (resolutionStrategy == CollisionResolution.OPEN_ADDRESSING) {
-            capacity = linearTable.capacity();
             if (linearTable.get(index) == null) {
                 return; // Key not found
             }
@@ -221,7 +190,6 @@ public class HashTable<K, V> {
                 size--;
             }
         } else {
-            capacity = linkedTable.capacity();
             LinkedList<Entry<K, V>> chain = linkedTable.get(index);
             if (chain != null) {
                 for (int i = 0; i < chain.size(); i++) {
@@ -232,10 +200,6 @@ public class HashTable<K, V> {
                     }
                 }
             }
-        }
-
-        if (size > 0 && size <= capacity / 4) {
-            rehash();
         }
     }
 
@@ -251,7 +215,26 @@ public class HashTable<K, V> {
         }
 
         size = 0;
-        rehash();
+    }
+
+    public CollisionResolution getResolutionStrategy() {
+        return resolutionStrategy;
+    }
+
+    public ProbingStrategy getProbingStrategy() {
+        return probingStrategy;
+    }
+
+    public DynamicArray<Entry<K, V>> getLinearTable() {
+        return linearTable;
+    }
+
+    public DynamicArray<LinkedList<Entry<K, V>>> getLinkedTable() {
+        return linkedTable;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     /**

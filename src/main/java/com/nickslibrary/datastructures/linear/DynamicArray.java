@@ -117,7 +117,7 @@ public class DynamicArray<T> {
      */
     @SuppressWarnings("unchecked")
     public T get(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || index >= capacity) {
             throw new IndexOutOfBoundsException("Index " + index + " is out of bounds. Size of array is " + size);
         }
         return (T) array[index];
@@ -131,7 +131,7 @@ public class DynamicArray<T> {
      * @param index the index of the element to remove
      */
     public void remove(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0 || index >= capacity) {
             throw new IndexOutOfBoundsException();
         }
 
@@ -139,7 +139,9 @@ public class DynamicArray<T> {
         for (int i = index; i < size - 1; i++) {
             array[i] = array[i + 1];
         }
-        array[--size] = null; // Nullify the last element to avoid memory leaks
+        if (size != 0) {
+            array[--size] = null; // Nullify the last element to avoid memory leaks
+        }        
 
         // Shrink the array if necessary (when significantly underutilized, rather than
         // at every time utilization falls to 50%)
@@ -152,7 +154,7 @@ public class DynamicArray<T> {
      * Resizes the internal array to accommodate more elements.
      * The capacity is doubled every time resizing occurs.
      */
-    private void resize() {
+    public void resize() {
         capacity *= 2;
         array = Arrays.copyOf(array, capacity);
         Arrays.fill(array, size, array.length, null);
