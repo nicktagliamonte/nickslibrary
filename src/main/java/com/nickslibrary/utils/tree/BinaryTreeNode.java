@@ -1,4 +1,4 @@
-package com.nickslibrary.utils;
+package com.nickslibrary.utils.tree;
 
 public class BinaryTreeNode<T> extends TreeNode<T> {
     private BinaryTreeNode<T> left;

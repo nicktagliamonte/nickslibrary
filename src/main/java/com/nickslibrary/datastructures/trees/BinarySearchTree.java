@@ -5,15 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-/**
- * A generic Binary Search Tree (BST) implementation.
- * This class provides basic BST operations such as insertion, search, 
- * and inorder traversal. It supports generic types that implement Comparable.
- *
- * @param <T> the type of elements stored in the tree, must be Comparable
- */
-
-import com.nickslibrary.utils.BinaryTreeNode;
+import com.nickslibrary.utils.tree.BinaryTreeNode;
 
 public class BinarySearchTree<T extends Comparable<T>> {
     private BinaryTreeNode<T> root;

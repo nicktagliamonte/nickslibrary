@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import com.nickslibrary.utils.AVLTreeNode;
+import com.nickslibrary.utils.tree.AVLTreeNode;
 
 /**
  * Implementation of an AVL Tree.

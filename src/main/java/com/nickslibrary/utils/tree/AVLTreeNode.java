@@ -1,4 +1,4 @@
-package com.nickslibrary.utils;
+package com.nickslibrary.utils.tree;
 
 public class AVLTreeNode<T> extends TreeNode<T> {
     protected AVLTreeNode<T> left;

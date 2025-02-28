@@ -1,4 +1,4 @@
-package com.nickslibrary.utils;
+package com.nickslibrary.utils.tree;
 
 public abstract class TreeNode<T> {
     protected T value;

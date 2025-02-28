@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.nickslibrary.datastructures.trees.AVLTree;
-import com.nickslibrary.utils.AVLTreeNode;
+import com.nickslibrary.utils.tree.AVLTreeNode;
 
 import java.util.List;
 

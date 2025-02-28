@@ -2,7 +2,7 @@ package com.nickslibrary.datastructures.hashing;
 
 import com.nickslibrary.datastructures.linear.DynamicArray;
 import com.nickslibrary.datastructures.linear.LinkedList;
-import com.nickslibrary.utils.HashFunctions;
+import com.nickslibrary.utils.hash.HashFunctions;
 
 /**
  * A hash table implementation that supports both open addressing and separate

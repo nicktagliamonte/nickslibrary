@@ -1,4 +1,4 @@
-package com.nickslibrary.utils;
+package com.nickslibrary.utils.hash;
 
 import com.nickslibrary.datastructures.hashing.HashTable.Entry;
 import com.nickslibrary.datastructures.hashing.HashTable.ProbingStrategy;
