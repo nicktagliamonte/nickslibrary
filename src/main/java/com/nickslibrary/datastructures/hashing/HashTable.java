@@ -7,11 +7,10 @@ import com.nickslibrary.utils.hash.HashFunctions;
 /**
  * A hash table implementation that supports both open addressing and separate
  * chaining collision resolution methods.
- * 
+ *
  * @param <K> the type of keys in this hash table
  * @param <V> the type of values in this hash table
  */
-
 public class HashTable<K, V> {
 
     /**
@@ -39,7 +38,7 @@ public class HashTable<K, V> {
     /**
      * Constructs a new hash table with the specified collision resolution strategy.
      * Defaults to Linear Probing if an alternative is not specified
-     * 
+     *
      * @param capacity           the initial capacity of the table
      * @param resolutionStrategy the collision resolution strategy (OPEN_ADDRESSING
      *                           or SEPARATE_CHAINING)
@@ -51,7 +50,7 @@ public class HashTable<K, V> {
     /**
      * Constructs a new hash table with the specified collision resolution strategy
      * and probing strategy.
-     * 
+     *
      * @param capacity           the initial capacity of the table
      * @param resolutionStrategy the collision resolution strategy (OPEN_ADDRESSING
      *                           or SEPARATE_CHAINING)
@@ -83,7 +82,7 @@ public class HashTable<K, V> {
 
     /**
      * Hashes the given key and returns the index where it should be stored.
-     * 
+     *
      * @param key the key to hash
      * @return the index in the table where the key should be placed
      */
@@ -98,7 +97,7 @@ public class HashTable<K, V> {
 
     /**
      * Inserts a key-value pair into the hash table.
-     * 
+     *
      * @param key   the key to insert
      * @param value the value to associate with the key
      */
@@ -113,12 +112,10 @@ public class HashTable<K, V> {
                 linearTable.add(index, new Entry<>(key, value));
             }
         } else {
-            // Chain is a reference to the list at table[index], which may be empty
-            // any change made to chain will be reflected in the actual list at table[index]
             LinkedList<Entry<K, V>> chain = linkedTable.get(index);
             if (chain == null) {
-                chain = new LinkedList<Entry<K, V>>(false, true); // Initialize if it's null
-                linkedTable.add(index, chain); // Add the newly created chain back into the table
+                chain = new LinkedList<Entry<K, V>>(false, true);
+                linkedTable.add(index, chain);
             }
             chain.add(new Entry<>(key, value));
         }
@@ -128,7 +125,7 @@ public class HashTable<K, V> {
 
     /**
      * Retrieves the value associated with the given key.
-     * 
+     *
      * @param key the key to look up
      * @return the value associated with the key, or null if not found
      */
@@ -178,7 +175,7 @@ public class HashTable<K, V> {
 
         if (resolutionStrategy == CollisionResolution.OPEN_ADDRESSING) {
             if (linearTable.get(index) == null) {
-                return; // Key not found
+                return;
             }
 
             Entry<K, V> entry = linearTable.get(index);
@@ -202,7 +199,6 @@ public class HashTable<K, V> {
 
     /**
      * Removes all entries from the hash table, resetting it to an empty state.
-     * Ensures that the table is properly restructured by triggering a rehash.
      */
     public void clear() {
         if (resolutionStrategy == CollisionResolution.OPEN_ADDRESSING) {

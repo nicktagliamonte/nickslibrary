@@ -82,6 +82,21 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.3.0</version>
+          <executions>
+              <execution>
+                  <goals>
+                      <goal>javadoc</goal>
+                  </goals>
+                  <configuration>
+                      <outputDirectory>${project.build.directory}/apidocs</outputDirectory>
+                  </configuration>
+              </execution>
+          </executions>
+      </plugin>
       </plugins>
     </pluginManagement>
   </build>
