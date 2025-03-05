@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.nickslibrary.advanced.FenwickTreeTest
--------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in com.nickslibrary.advanced.FenwickTreeTest

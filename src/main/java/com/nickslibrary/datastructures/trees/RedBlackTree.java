@@ -24,6 +24,7 @@ public class RedBlackTree<T extends Comparable<T>> implements Iterable<T> {
      *
      * @param value The value to insert.
      */
+    @SuppressWarnings("null")
     public void insert(T value) {
         RedBlackTreeNode<T> newNode = new RedBlackTreeNode<>(value);
         if (root == null) {

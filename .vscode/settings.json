@@ -2,8 +2,10 @@
     "java.configuration.updateBuildConfiguration": "interactive",
     "java.debug.settings.onBuildFailureProceed": true,
     "cSpell.words": [
+        "annprocess",
         "datastructures",
         "heapify",
         "Treap"
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }

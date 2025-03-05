@@ -1,6 +1,6 @@
 package com.nickslibrary.advanced;
 
-import com.nickslibrary.datastructures.advanced.BloomFilter;
+import com.nickslibrary.datastructures.advanced.BloomFilterCustom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BloomFilterTest {
 
-    private BloomFilter<String> bloomFilter;
+    private BloomFilterCustom<String> bloomFilter;
 
     @SuppressWarnings("unchecked")
     @BeforeEach
@@ -19,7 +19,7 @@ class BloomFilterTest {
                 s -> s.hashCode(),
                 s -> s.hashCode() * 31
         };
-        bloomFilter = new BloomFilter<>(1000, 2, hashFunctions);
+        bloomFilter = new BloomFilterCustom<>(1000, 2, hashFunctions);
     }
 
     @Test
