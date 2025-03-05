@@ -1,5 +1,9 @@
 # nickslibrary
-A library of data structures implemented in Java
+A library of data structures implemented in Java  
+
+In this normalized plot comparing the differences of individual methods between my items and java's, items in blue indicate that the operation was faster on my implementation. Items in red indicate Java's (or Apache's or Guava's) was faster  
+Instances of methods where the difference was zero or very near zero were disregarded, and those methods make up the overwhelming majority of the methods in this repository. Mostly, my implementation is a wash when compared to the real things. But I did get a couple in marginally faster!  
+![Alt text](https://raw.githubusercontent.com/nicktagliamonte/nickslibrary/refs/heads/main/scripts/benchmark_plot.png)
 
 ## List of structures  
 ### Linear  
