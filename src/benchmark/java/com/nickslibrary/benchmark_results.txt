@@ -1,0 +1,109 @@
+Benchmark                                               Mode  Cnt   Score     Error  Units
+AVLTreeBenchmark.testCustomAVLTreeContains              avgt    5  ≈ 10⁻⁵            ms/op
+AVLTreeBenchmark.testCustomAVLTreeDelete                avgt    5  ≈ 10⁻⁵            ms/op
+AVLTreeBenchmark.testCustomAVLTreeInsert                avgt    5  ≈ 10⁻⁵            ms/op
+AVLTreeBenchmark.testJavaTreeMapContains                avgt    5  ≈ 10⁻⁵            ms/op
+AVLTreeBenchmark.testJavaTreeMapDelete                  avgt    5  ≈ 10⁻⁵            ms/op
+AVLTreeBenchmark.testJavaTreeMapInsert                  avgt    5  ≈ 10⁻⁵            ms/op
+
+AdjListBenchmark.testCustomGraphGetNeighbors            avgt    5  ≈ 10⁻⁵            ms/op
+AdjListBenchmark.testCustomGraphHasEdge                 avgt    5  ≈ 10⁻⁶            ms/op
+AdjListBenchmark.testCustomGraphRemoveEdge              avgt    5  ≈ 10⁻⁶            ms/op
+AdjListBenchmark.testJavaGraphGetNeighbors              avgt    5  ≈ 10⁻⁵            ms/op
+AdjListBenchmark.testJavaGraphHasEdge                   avgt    5  ≈ 10⁻⁵            ms/op
+AdjListBenchmark.testJavaGraphRemoveEdge                avgt    5  ≈ 10⁻⁵            ms/op
+
+AdjMatrixBenchmark.testCustomGraphAddEdge               avgt    5  ≈ 10⁻⁶            ms/op
+AdjMatrixBenchmark.testCustomGraphGetNeighbors          avgt    5   0.001 ±   0.001  ms/op
+AdjMatrixBenchmark.testCustomGraphHasEdge               avgt    5  ≈ 10⁻⁶            ms/op
+AdjMatrixBenchmark.testCustomGraphRemoveEdge            avgt    5  ≈ 10⁻⁶            ms/op
+AdjMatrixBenchmark.testJavaGraphAddEdge                 avgt    5  ≈ 10⁻⁵            ms/op
+AdjMatrixBenchmark.testJavaGraphGetNeighbors            avgt    5  ≈ 10⁻⁶            ms/op
+AdjMatrixBenchmark.testJavaGraphHasEdge                 avgt    5  ≈ 10⁻⁶            ms/op
+AdjMatrixBenchmark.testJavaGraphRemoveEdge              avgt    5  ≈ 10⁻⁶            ms/op
+
+BinarySearchTreeBenchmark.testCustomBSTContains         avgt    5   0.002 ±   0.001  ms/op
+BinarySearchTreeBenchmark.testCustomBSTDelete           avgt    5   0.002 ±   0.001  ms/op
+BinarySearchTreeBenchmark.testCustomBSTInsert           avgt    5   0.005 ±   0.001  ms/op
+BinarySearchTreeBenchmark.testJavaTreeMapContains       avgt    5  ≈ 10⁻⁵            ms/op
+BinarySearchTreeBenchmark.testJavaTreeMapDelete         avgt    5  ≈ 10⁻⁵            ms/op
+BinarySearchTreeBenchmark.testJavaTreeMapInsert         avgt    5  ≈ 10⁻⁵            ms/op
+
+BloomFilterBenchmark.testCustomBloomFilterAdd           avgt    5  ≈ 10⁻⁵            ms/op
+BloomFilterBenchmark.testCustomBloomFilterMightContain  avgt    5  ≈ 10⁻⁵            ms/op
+BloomFilterBenchmark.testGuavaBloomFilterAdd            avgt    5  ≈ 10⁻⁴            ms/op
+BloomFilterBenchmark.testGuavaBloomFilterMightContain   avgt    5  ≈ 10⁻⁵            ms/op
+
+CircularQueueBenchmark.testCustomQueuePeek              avgt    5  ≈ 10⁻⁶            ms/op
+CircularQueueBenchmark.testJavaQueuePeek                avgt    5  ≈ 10⁻⁶            ms/op
+
+DisjointSetBenchmark.testCustomDisjointSetFind          avgt    5  ≈ 10⁻⁶            ms/op
+DisjointSetBenchmark.testCustomDisjointSetReset         avgt    5  ≈ 10⁻⁴            ms/op
+DisjointSetBenchmark.testCustomDisjointSetUnion         avgt    5  ≈ 10⁻⁶            ms/op
+DisjointSetBenchmark.testMapFind                        avgt    5  ≈ 10⁻⁵            ms/op
+DisjointSetBenchmark.testMapReset                       avgt    5   0.016 ±   0.001  ms/op
+DisjointSetBenchmark.testMapUnion                       avgt    5  ≈ 10⁻⁵            ms/op
+
+DynamicArrayBenchmark.testCustomDynamicArrayGet         avgt    5  ≈ 10⁻⁶            ms/op
+DynamicArrayBenchmark.testJavaArrayListGet              avgt    5  ≈ 10⁻⁶            ms/op
+
+FenwickTreeBenchmark.testCustomFenwickTreeQuery         avgt    5  ≈ 10⁻⁵            ms/op
+FenwickTreeBenchmark.testCustomFenwickTreeRangeQuery    avgt    5  ≈ 10⁻⁵            ms/op
+FenwickTreeBenchmark.testCustomFenwickTreeUpdate        avgt    5  ≈ 10⁻⁵            ms/op
+FenwickTreeBenchmark.testPrefixSumArrayQuery            avgt    5  ≈ 10⁻⁷            ms/op
+FenwickTreeBenchmark.testPrefixSumArrayRangeQuery       avgt    5  ≈ 10⁻⁷            ms/op
+FenwickTreeBenchmark.testPrefixSumArrayUpdate           avgt    5  ≈ 10⁻⁵            ms/op
+
+KdTreeBenchmark.testCustomKdTreeInsert                  avgt    5   0.001 ±   0.001  ms/op
+KdTreeBenchmark.testCustomKdTreeRangeSearch             avgt    5   0.001 ±   0.001  ms/op
+KdTreeBenchmark.testCustomKdTreeSearch                  avgt    5  ≈ 10⁻⁵            ms/op
+KdTreeBenchmark.testPointListInsert                     avgt    5  ≈ 10⁻⁴            ms/op
+KdTreeBenchmark.testPointListRangeSearch                avgt    5   0.002 ±   0.001  ms/op
+KdTreeBenchmark.testPointListSearch                     avgt    5   0.001 ±   0.001  ms/op
+
+LinkedListBenchmark.testCustomLinkedListAdd             avgt    5  ≈ 10⁻⁴            ms/op
+LinkedListBenchmark.testCustomLinkedListGet             avgt    5  ≈ 10⁻³            ms/op
+LinkedListBenchmark.testCustomLinkedListRemove          avgt    5   0.001 ±   0.001  ms/op
+LinkedListBenchmark.testJavaLinkedListAdd               avgt    5  ≈ 10⁻⁴            ms/op
+LinkedListBenchmark.testJavaLinkedListGet               avgt    5  ≈ 10⁻³            ms/op
+LinkedListBenchmark.testJavaLinkedListRemove            avgt    5   0.001 ±   0.001  ms/op
+
+QuadTreeBenchmark.testCustomQuadTreeInsert      avgt    5   0.001 ±  0.001  ms/op
+QuadTreeBenchmark.testCustomQuadTreeQuery       avgt    5   0.002 ±  0.001  ms/op
+QuadTreeBenchmark.testPointListInsert           avgt    5  ≈ 10⁻⁴           ms/op
+QuadTreeBenchmark.testPointListQuery            avgt    5   0.002 ±  0.001  ms/op
+
+SkipListBenchmark.testCustomSkipListDelete      avgt    5  ≈ 10⁻⁵           ms/op
+SkipListBenchmark.testCustomSkipListInsert      avgt    5  ≈ 10⁻⁴           ms/op
+SkipListBenchmark.testCustomSkipListSearch      avgt    5  ≈ 10⁻⁴           ms/op
+SkipListBenchmark.testJavaTreeMapDelete         avgt    5  ≈ 10⁻⁵           ms/op
+SkipListBenchmark.testJavaTreeMapInsert         avgt    5  ≈ 10⁻⁵           ms/op
+SkipListBenchmark.testJavaTreeMapSearch         avgt    5  ≈ 10⁻⁵           ms/op
+
+SplayTreeBenchmark.testCustomSplayTreeDelete    avgt    5  ≈ 10⁻⁵           ms/op
+SplayTreeBenchmark.testCustomSplayTreeInsert    avgt    5  ≈ 10⁻⁶           ms/op
+SplayTreeBenchmark.testCustomSplayTreeSearch    avgt    5  ≈ 10⁻⁶           ms/op
+SplayTreeBenchmark.testJavaTreeMapDelete        avgt    5  ≈ 10⁻⁵           ms/op
+SplayTreeBenchmark.testJavaTreeMapInsert        avgt    5  ≈ 10⁻⁵           ms/op
+SplayTreeBenchmark.testJavaTreeMapSearch        avgt    5  ≈ 10⁻⁵           ms/op
+
+StackLinkedListBenchmark.testCustomStackPeek    avgt    5  ≈ 10⁻⁶           ms/op
+StackLinkedListBenchmark.testCustomStackPush    avgt    5  ≈ 10⁻⁴           ms/op
+StackLinkedListBenchmark.testJavaStackPeek      avgt    5  ≈ 10⁻⁵           ms/op
+StackLinkedListBenchmark.testJavaStackPush      avgt    4  ≈ 10⁻⁵           ms/op
+
+StandardTrieBenchmark.testApacheTrieDelete      avgt    5  ≈ 10⁻⁵           ms/op
+StandardTrieBenchmark.testApacheTrieInsert      avgt    5  ≈ 10⁻⁵           ms/op
+StandardTrieBenchmark.testApacheTrieSearch      avgt    5  ≈ 10⁻⁵           ms/op
+StandardTrieBenchmark.testApacheTrieStartsWith  avgt    5  ≈ 10⁻⁶           ms/op
+StandardTrieBenchmark.testCustomTrieDelete      avgt    5  ≈ 10⁻⁵           ms/op
+StandardTrieBenchmark.testCustomTrieInsert      avgt    5  ≈ 10⁻⁵           ms/op
+StandardTrieBenchmark.testCustomTrieSearch      avgt    5  ≈ 10⁻⁵           ms/op
+StandardTrieBenchmark.testCustomTrieStartsWith  avgt    5  ≈ 10⁻⁵           ms/op
+
+TreapBenchmark.testCustomTreapDelete            avgt    5  ≈ 10⁻⁵           ms/op
+TreapBenchmark.testCustomTreapInsert            avgt    5  ≈ 10⁻⁴           ms/op
+TreapBenchmark.testCustomTreapSearch            avgt    5  ≈ 10⁻⁵           ms/op
+TreapBenchmark.testJavaTreeMapDelete            avgt    5  ≈ 10⁻⁵           ms/op
+TreapBenchmark.testJavaTreeMapInsert            avgt    5  ≈ 10⁻⁵           ms/op
+TreapBenchmark.testJavaTreeMapSearch            avgt    5  ≈ 10⁻⁵           ms/op

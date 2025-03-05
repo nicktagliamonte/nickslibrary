@@ -134,6 +134,25 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>3.1.0</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>exec</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <executable>python3</executable>            <!-- Ensure you have the correct Python executable -->
+            <arguments>
+              <argument>-c</argument>
+              <argument>import sys; print(sys.executable); import pkg_resources; print([d.project_name for d in pkg_resources.working_set])</argument>
+            </arguments>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
   </build>

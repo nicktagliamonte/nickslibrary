@@ -7,5 +7,7 @@
         "heapify",
         "Treap"
     ],
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "python.analysis.extraPaths": ["${workspaceFolder}/scripts"],
+    "python.defaultInterpreterPath": "/usr/bin/python3"
 }
