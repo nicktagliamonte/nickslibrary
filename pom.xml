@@ -6,7 +6,8 @@
 
   <groupId>com.nickslibrary</groupId>
   <artifactId>nickslibrary</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
+  <packaging>jar</packaging>
 
   <name>nickslibrary</name>
   <!-- FIXME change it to the project's website -->
