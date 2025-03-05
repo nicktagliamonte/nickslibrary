@@ -46,7 +46,7 @@ for i in range(0, len(benchmark_data), 2):
         structure2, time2 = benchmark_data[i + 1]
         diff = time1 - time2
         if diff != 0:  # Exclude instances where the subtraction result is 0
-            differences.append(diff)
+            differences.append(-diff)  # Multiply by -1 to flip the plot
             if "Custom" in structure1:
                 x_labels.append(structure1.split("Custom")[1])
             else:
@@ -68,7 +68,7 @@ x = np.arange(len(x_labels))
 width = 0.4
 
 # Color bars based on their value
-colors = ['red' if diff > 0 else 'blue' for diff in normalized_differences]
+colors = ['red' if diff < 0 else 'blue' for diff in normalized_differences]
 
 plt.bar(x, normalized_differences, width, color=colors)
 
